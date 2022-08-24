@@ -2,7 +2,7 @@ import "./Card.css";
 
 interface ICardProps {
   className: string;
-  children: React.ReactNode;
+  children: any;
 }
 
 const Card = (props: ICardProps) => {

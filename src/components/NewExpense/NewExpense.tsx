@@ -1,6 +1,7 @@
 import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm";
 import { IExpeseData } from "./ExpenseForm";
+import { useState } from "react";
 
 export interface IExpenseDataWithId extends IExpeseData {
   id: string;
@@ -11,6 +12,7 @@ interface INewExpenseProps {
 }
 
 const NewExpense = (props: INewExpenseProps) => {
+  const [isEditing, setIsEditing] = useState(false);
   const onSaveExpenseDataHandler = (enteredExpenseData: IExpeseData) => {
     const expenseData: IExpenseDataWithId = {
       ...enteredExpenseData,
@@ -18,11 +20,28 @@ const NewExpense = (props: INewExpenseProps) => {
     };
 
     props.onAddExpense(expenseData);
+
+    setIsEditing(false);
   };
 
+  const startEditingHandler = () => {
+    setIsEditing(true);
+  };
+
+  const stopEditingHandler = () => {
+    setIsEditing(false);
+  };
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={onSaveExpenseDataHandler}></ExpenseForm>
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Add New Expense</button>
+      )}
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseData={onSaveExpenseDataHandler}
+          onCancel={stopEditingHandler}
+        ></ExpenseForm>
+      )}
     </div>
   );
 };

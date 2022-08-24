@@ -1,7 +1,6 @@
 import "./ExpenseItem.css";
 import ExpenseDate from "./ExpenseDate";
 import Card from "../UI/Card";
-import { useState } from "react";
 
 export interface IExpenseItemProps {
   title: string;
@@ -12,21 +11,16 @@ export interface IExpenseItemProps {
 const ExpenseItem = (props: IExpenseItemProps) => {
   const { date, title, amount } = props;
 
-  const [expenseTitle, setExpenseTitle] = useState(title);
-
-  const onClickHandler = () => {
-    setExpenseTitle("Updated!");
-  };
-
   return (
-    <Card className="expense-item">
-      <ExpenseDate date={date} />
-      <div className="expense-item__description">
-        <h2>{expenseTitle}</h2>
-        <div className="expense-item__price">{amount}</div>
-      </div>
-      <button onClick={onClickHandler}>Change Title</button>
-    </Card>
+    <li>
+      <Card className="expense-item">
+        <ExpenseDate date={date} />
+        <div className="expense-item__description">
+          <h2>{title}</h2>
+          <div className="expense-item__price">{amount}</div>
+        </div>
+      </Card>
+    </li>
   );
 };
 

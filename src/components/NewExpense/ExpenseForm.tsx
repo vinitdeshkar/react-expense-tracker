@@ -3,11 +3,12 @@ import "./ExpenseForm.css";
 
 interface IExpenseFormProps {
   onSaveExpenseData: (enteredExpenseData: IExpeseData) => void;
+  onCancel: () => void;
 }
 
 export interface IExpeseData {
   title: string;
-  amount: string;
+  amount: number;
   date: Date;
 }
 
@@ -33,7 +34,7 @@ const ExpenseForm = (props: IExpenseFormProps) => {
 
     const expenseData: IExpeseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
 
@@ -77,6 +78,9 @@ const ExpenseForm = (props: IExpenseFormProps) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={props.onCancel}>
+          Cancel
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
